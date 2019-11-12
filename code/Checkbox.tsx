@@ -5,10 +5,20 @@ import { CheckedIcon, BoxIcon } from "./canvas"
 export function Checkbox(props) {
     const { checked } = props
 
+    const [isChecked, setIsChecked] = React.useState(checked)
+
+    React.useEffect(() => {
+        setIsChecked(checked)
+    }, [checked])
+
+    const toggleIsChecked = () => {
+        setIsChecked(!isChecked)
+    }
+
     return (
-        <Frame name="TouchTarget">
+        <Frame name="TouchTarget" onTap={toggleIsChecked}>
             <BoxIcon center />
-            {checked && <CheckedIcon center />}
+            {isChecked && <CheckedIcon center />}
         </Frame>
     )
 }
